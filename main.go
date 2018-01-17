@@ -7,7 +7,7 @@ import (
 	neural "github.com/NOX73/go-neural"
 	"github.com/NOX73/go-neural/learn"
 	"github.com/NOX73/go-neural/persist"
-	"github.com/aoaolion/mnist/common/logger"
+	"github.com/aoaolion/ann-mnist/common/logger"
 	log "github.com/cihub/seelog"
 )
 
