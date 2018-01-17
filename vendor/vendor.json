@@ -19,7 +19,13 @@
 			"path": "github.com/NOX73/go-neural/persist",
 			"revision": "f327eff30de74b5b2d18236415bd35a2ee5c4e59",
 			"revisionTime": "2016-02-08T13:37:16Z"
+		},
+		{
+			"checksumSHA1": "Ydqm9Z29I9KdF7sq6NjWmGFrOig=",
+			"path": "github.com/cihub/seelog",
+			"revision": "175e6e3d439fe2e1cee7ab652b12eb546c145a13",
+			"revisionTime": "2016-10-09T22:53:54Z"
 		}
 	],
-	"rootPath": "github.com/aoaolion/mnist"
+	"rootPath": "github.com/aoaolion/ann-mnist"
 }
