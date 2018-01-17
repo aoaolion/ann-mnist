@@ -1,0 +1,25 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "Nn3Oq6q0RQtdgDgTVOXrGE2FN6o=",
+			"path": "github.com/NOX73/go-neural",
+			"revision": "f327eff30de74b5b2d18236415bd35a2ee5c4e59",
+			"revisionTime": "2016-02-08T13:37:16Z"
+		},
+		{
+			"checksumSHA1": "zg011iNA3wiyaahWBn9KcgGfWWs=",
+			"path": "github.com/NOX73/go-neural/learn",
+			"revision": "f327eff30de74b5b2d18236415bd35a2ee5c4e59",
+			"revisionTime": "2016-02-08T13:37:16Z"
+		},
+		{
+			"checksumSHA1": "h+KEfymY/tDUzj+17TgwjohWRug=",
+			"path": "github.com/NOX73/go-neural/persist",
+			"revision": "f327eff30de74b5b2d18236415bd35a2ee5c4e59",
+			"revisionTime": "2016-02-08T13:37:16Z"
+		}
+	],
+	"rootPath": "github.com/aoaolion/mnist"
+}
