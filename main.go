@@ -2,6 +2,8 @@ package main
 
 import (
 	"flag"
+	"net/http"
+	_ "net/http/pprof"
 
 	"github.com/aoaolion/ann-mnist/common/logger"
 	log "github.com/cihub/seelog"
@@ -24,6 +26,15 @@ func main() {
 
 	logger.InitLogger("conf/logger.xml", true)
 	log.Info(*mode, " mode is start")
+
+	//远程获取pprof数据
+	go func() {
+		err := http.ListenAndServe("localhost:8888", nil)
+		if err != nil {
+			log.Error(err)
+			return
+		}
+	}()
 
 	if *mode == "train" {
 		Train()

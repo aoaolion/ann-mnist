@@ -18,7 +18,7 @@ func Train() {
 	network.RandomizeSynapses()
 
 	maxTrainRound := 100
-	maxTrainSet := imageFile.Num
+	maxTrainSet := 10000 //imageFile.Num
 
 	for round := 0; round < maxTrainRound; round++ {
 		avg := 0.0
