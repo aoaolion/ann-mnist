@@ -34,6 +34,7 @@ func train() {
 
 	maxTrainRound := 100
 	maxTrainSet := imageFile.Num
+	lastAvg := 1.0
 
 	for round := 0; round < maxTrainRound; round++ {
 		avg := 0.0
@@ -56,15 +57,17 @@ func train() {
 			learn.Learn(network, in, ideal, 0.2)
 			estimate := learn.Evaluation(network, in, ideal)
 			avg += estimate
-			//			if i%100 == 0 {
-			//				log.Infof("round:%d, training:%d, estimate:%f", round, i, estimate)
-			//			}
 		}
 		avg = avg / float64(maxTrainSet)
 		log.Infof("round:%d, e:%f", round, avg)
 		if avg < 0.01 {
 			break
 		}
+		if lastAvg < avg {
+			log.Info("train too much")
+			break
+		}
+		lastAvg = avg
 		persist.ToFile("data/network.json", network)
 	}
 }
