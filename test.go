@@ -5,13 +5,13 @@ import (
 	log "github.com/cihub/seelog"
 )
 
-func Test(netwrok string) {
+func Test(netPath string) {
 	labelFile, imageFile, err := loadDataSet(testLabel, testImage)
 	if err != nil {
 		log.Error(err)
 		return
 	}
-	network := persist.FromFile(network)
+	network := persist.FromFile(netPath)
 	//maxTestSet := 1000
 	maxTestSet := labelFile.Num
 
