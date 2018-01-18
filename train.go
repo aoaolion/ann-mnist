@@ -14,15 +14,16 @@ func Train() {
 		return
 	}
 	// 24*24 = 784
-	network := neural.NewNetwork(784, []int{784, 30, 10})
+	network := neural.NewNetwork(784, []int{300, 100, 10})
 	network.RandomizeSynapses()
 
-	maxTrainRound := 100
-	maxTrainSet := 10000 //imageFile.Num
+	maxTrainRound := 10000
+	maxTrainSet := imageFile.Num
 
 	for round := 0; round < maxTrainRound; round++ {
 		avg := 0.0
 		for i := 0; i < maxTrainSet; i++ {
+			//s := time.Now()
 			in := make([]float64, 0)
 			buf := imageFile.GetImage(i)
 			for _, v := range buf {
@@ -41,6 +42,7 @@ func Train() {
 			learn.Learn(network, in, ideal, 0.2)
 			estimate := learn.Evaluation(network, in, ideal)
 			avg += estimate
+			//log.Info("4. ", time.Since(s))
 			//			if i%100 == 0 {
 			//				log.Infof("round:%d, training:%d, estimate:%f", round, i, estimate)
 			//			}
