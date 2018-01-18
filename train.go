@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	neural "github.com/NOX73/go-neural"
 	"github.com/NOX73/go-neural/learn"
 	"github.com/NOX73/go-neural/persist"
@@ -52,6 +54,7 @@ func Train() {
 		if avg < 0.01 {
 			break
 		}
-		persist.ToFile("data/network.json", network)
+		path := fmt.Sprintf("data/network_%d_%f.json", round, avg)
+		persist.ToFile(path, network)
 	}
 }
