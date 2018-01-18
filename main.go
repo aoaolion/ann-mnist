@@ -10,8 +10,10 @@ import (
 )
 
 var (
-	mode    = flag.String("mode", "train", "working mode train or test")
-	network = flag.String("network", "data/network.json", "saved neural network")
+	mode         = flag.String("mode", "train", "working mode train or test")
+	maxIteration = flag.Int("i", 100, "max iteration")
+	maxTrainSize = flag.Int("t", 100, "max train set size")
+	network      = flag.String("network", "data/network.json", "saved neural network")
 )
 
 const (
@@ -38,7 +40,7 @@ func main() {
 	}()
 
 	if *mode == "train" {
-		Train()
+		Train(*maxIteration, *maxTrainSize)
 	} else if *mode == "test" {
 		Test(*network)
 	} else if *mode == "export" {

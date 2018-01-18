@@ -9,7 +9,7 @@ import (
 	log "github.com/cihub/seelog"
 )
 
-func Train() {
+func Train(maxIteration, maxTrainSize int) {
 	labelFile, imageFile, err := loadDataSet(trainLabel, trainImage)
 	if err != nil {
 		log.Error(err)
@@ -19,12 +19,15 @@ func Train() {
 	network := neural.NewNetwork(784, []int{300, 100, 10})
 	network.RandomizeSynapses()
 
-	maxTrainRound := 10000
-	maxTrainSet := imageFile.Num
+	log.Infof("maxIteration: %d, trainSet: %d", maxIteration, maxTrainSize)
 
-	for round := 0; round < maxTrainRound; round++ {
+	if maxTrainSize > imageFile.Num {
+		maxTrainSize = imageFile.Num
+	}
+
+	for iteration := 0; iteration < maxIteration; iteration++ {
 		avg := 0.0
-		for i := 0; i < maxTrainSet; i++ {
+		for i := 0; i < maxTrainSize; i++ {
 			//s := time.Now()
 			in := make([]float64, 0)
 			buf := imageFile.GetImage(i)
@@ -46,15 +49,15 @@ func Train() {
 			avg += estimate
 			//log.Info("4. ", time.Since(s))
 			//			if i%100 == 0 {
-			//				log.Infof("round:%d, training:%d, estimate:%f", round, i, estimate)
+			//				log.Infof("iteration:%d, training:%d, estimate:%f", iteration, i, estimate)
 			//			}
 		}
-		avg = avg / float64(maxTrainSet)
-		log.Infof("round:%d, e:%f", round, avg)
+		avg = avg / float64(maxTrainSize)
+		log.Infof("iteration:%d, e:%f", iteration, avg)
 		if avg < 0.01 {
 			break
 		}
-		path := fmt.Sprintf("data/network_%d_%f.json", round, avg)
+		path := fmt.Sprintf("data/network_%d_%f.json", iteration, avg)
 		persist.ToFile(path, network)
 		go Test(path)
 	}
