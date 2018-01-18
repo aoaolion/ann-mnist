@@ -5,13 +5,13 @@ import (
 	log "github.com/cihub/seelog"
 )
 
-func Test() {
+func Test(netwrok string) {
 	labelFile, imageFile, err := loadDataSet(testLabel, testImage)
 	if err != nil {
 		log.Error(err)
 		return
 	}
-	network := persist.FromFile("data/network.json")
+	network := persist.FromFile(network)
 	//maxTestSet := 1000
 	maxTestSet := labelFile.Num
 
@@ -36,7 +36,7 @@ func Test() {
 			}
 			//log.Infof("[%d]:%f", i, v)
 		}
-		log.Infof("[%d] %d -> %d, possible:%f", i, labelFile.Label[i], resultNum, resultRate)
+		//log.Infof("[%d] %d -> %d, possible:%f", i, labelFile.Label[i], resultNum, resultRate)
 		if int(labelFile.Label[i]) == resultNum {
 			accurateNum++
 		}

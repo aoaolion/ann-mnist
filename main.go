@@ -10,7 +10,8 @@ import (
 )
 
 var (
-	mode = flag.String("mode", "train", "working mode train or test")
+	mode    = flag.String("mode", "train", "working mode train or test")
+	network = flag.String("network", "data/network.json", "saved neural network")
 )
 
 const (
@@ -39,7 +40,7 @@ func main() {
 	if *mode == "train" {
 		Train()
 	} else if *mode == "test" {
-		Test()
+		Test(*network)
 	} else if *mode == "export" {
 		Export()
 	}

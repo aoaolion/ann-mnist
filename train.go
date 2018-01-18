@@ -56,5 +56,6 @@ func Train() {
 		}
 		path := fmt.Sprintf("data/network_%d_%f.json", round, avg)
 		persist.ToFile(path, network)
+		go Test(path)
 	}
 }
