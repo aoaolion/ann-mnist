@@ -15,6 +15,7 @@ var (
 	maxSetSize   = flag.Int("n", 1000, "max set size")
 	speed        = flag.Float64("s", 0.01, "train speed")
 	debug        = flag.Bool("debug", false, "debug mode")
+	export       = flag.String("e", "training", "training/test")
 	network      = flag.String("network", "data/network.json", "saved neural network")
 )
 
@@ -48,6 +49,6 @@ func main() {
 	} else if *mode == "test" {
 		Test(*network, *maxSetSize)
 	} else if *mode == "export" {
-		Export()
+		Export(*export, *maxSetSize)
 	}
 }
