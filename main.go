@@ -11,8 +11,9 @@ import (
 
 var (
 	mode         = flag.String("mode", "train", "working mode train or test")
-	maxIteration = flag.Int("i", 100, "max iteration")
-	maxTrainSize = flag.Int("t", 100, "max train set size")
+	maxIteration = flag.Int("i", 1000, "max iteration")
+	maxSetSize   = flag.Int("s", 1000, "max train set size")
+	debug        = flag.Bool("debug", false, "debug mode")
 	network      = flag.String("network", "data/network.json", "saved neural network")
 )
 
@@ -30,19 +31,21 @@ func main() {
 	logger.InitLogger("conf/logger.xml", true)
 	log.Info(*mode, " mode is start")
 
-	//远程获取pprof数据
-	go func() {
-		err := http.ListenAndServe("localhost:8888", nil)
-		if err != nil {
-			log.Error(err)
-			return
-		}
-	}()
+	if *debug {
+		//远程获取pprof数据
+		go func() {
+			err := http.ListenAndServe("localhost:8888", nil)
+			if err != nil {
+				log.Error(err)
+				return
+			}
+		}()
+	}
 
 	if *mode == "train" {
-		Train(*maxIteration, *maxTrainSize)
+		Train(*maxIteration, *maxSetSize)
 	} else if *mode == "test" {
-		Test(*network)
+		Test(*network, *maxSetSize)
 	} else if *mode == "export" {
 		Export()
 	}

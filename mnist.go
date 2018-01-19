@@ -11,12 +11,12 @@ func loadDataSet(lablePath, imgPath string) (*LabelFile, *ImageFile, error) {
 		log.Error(err)
 		return nil, nil, err
 	}
-	log.Info(labelFile)
+	//log.Info(labelFile)
 	imageFile, err := NewImageFile(imgPath)
 	if err != nil {
 		log.Error(err)
 		return nil, nil, err
 	}
-	log.Info(imageFile)
+	//log.Info(imageFile)
 	return labelFile, imageFile, nil
 }

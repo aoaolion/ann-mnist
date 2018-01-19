@@ -5,21 +5,26 @@ import (
 	log "github.com/cihub/seelog"
 )
 
-func Test(netPath string) {
+func Test(netPath string, maxTestSetSize int) {
+	//labelFile, imageFile, err := loadDataSet(trainLabel, trainImage)
 	labelFile, imageFile, err := loadDataSet(testLabel, testImage)
 	if err != nil {
 		log.Error(err)
 		return
 	}
 	network := persist.FromFile(netPath)
-	//maxTestSet := 1000
-	maxTestSet := labelFile.Num
+
+	if maxTestSetSize > imageFile.Num {
+		maxTestSetSize = imageFile.Num
+	}
+
+	log.Infof("test set size: %d", maxTestSetSize)
 
 	accurateNum := 0
 	var resultNum int
 	var resultRate float64
 
-	for i := 0; i < maxTestSet; i++ {
+	for i := 0; i < maxTestSetSize; i++ {
 		resultNum = -1
 		resultRate = 0.0
 
@@ -41,5 +46,5 @@ func Test(netPath string) {
 			accurateNum++
 		}
 	}
-	log.Infof("Accurate:%d, Rate:%f", accurateNum, float64(accurateNum)/float64(maxTestSet))
+	log.Infof("Accurate:%d, Rate:%f", accurateNum, float64(accurateNum)/float64(maxTestSetSize))
 }

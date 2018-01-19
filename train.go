@@ -15,15 +15,15 @@ func Train(maxIteration, maxTrainSize int) {
 		log.Error(err)
 		return
 	}
-	// 24*24 = 784
+	// 28*28 = 784 inputs, 3 layers
 	network := neural.NewNetwork(784, []int{300, 100, 10})
 	network.RandomizeSynapses()
-
-	log.Infof("maxIteration: %d, trainSet: %d", maxIteration, maxTrainSize)
 
 	if maxTrainSize > imageFile.Num {
 		maxTrainSize = imageFile.Num
 	}
+
+	log.Infof("maxIteration: %d, trainSet: %d", maxIteration, maxTrainSize)
 
 	for iteration := 0; iteration < maxIteration; iteration++ {
 		avg := 0.0
@@ -53,12 +53,11 @@ func Train(maxIteration, maxTrainSize int) {
 			//			}
 		}
 		avg = avg / float64(maxTrainSize)
-		log.Infof("iteration:%d, e:%f", iteration, avg)
-		if avg < 0.01 {
-			break
-		}
+		log.Infof("iteration:%5d, e:%f", iteration, avg)
 		path := fmt.Sprintf("data/network_%d_%f.json", iteration, avg)
 		persist.ToFile(path, network)
-		go Test(path)
+		if avg < 0.001 {
+			break
+		}
 	}
 }
