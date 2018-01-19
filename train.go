@@ -67,7 +67,7 @@ func Train(maxIteration, maxSetSize int, speed float64) {
 			e := learn.Evaluation(network, inList[i], idealList[i])
 			avge += e
 
-			//log.Infof("iteration:%d, training:%d, estimate:%f", iteration, i, estimate)
+			//log.Infof("iteration:%d, training:%d, estimate:%f, consume:%s", iteration, i, e, time.Since(s))
 		}
 		avge = avge / float64(maxSetSize)
 		log.Infof("%5d, %f", iteration, avge)
