@@ -12,7 +12,8 @@ import (
 var (
 	mode         = flag.String("mode", "train", "working mode train or test")
 	maxIteration = flag.Int("i", 1000, "max iteration")
-	maxSetSize   = flag.Int("s", 1000, "max set size")
+	maxSetSize   = flag.Int("n", 1000, "max set size")
+	speed        = flag.Float64("s", 0.01, "train speed")
 	debug        = flag.Bool("debug", false, "debug mode")
 	network      = flag.String("network", "data/network.json", "saved neural network")
 )
@@ -43,7 +44,7 @@ func main() {
 	}
 
 	if *mode == "train" {
-		Train(*maxIteration, *maxSetSize)
+		Train(*maxIteration, *maxSetSize, *speed)
 	} else if *mode == "test" {
 		Test(*network, *maxSetSize)
 	} else if *mode == "export" {

@@ -39,7 +39,7 @@ func IdealData(labelFile *LabelFile) [][]float64 {
 
 }
 
-func Train(maxIteration, maxSetSize int) {
+func Train(maxIteration, maxSetSize int, speed float64) {
 	labelFile, imageFile, err := loadDataSet(trainLabel, trainImage)
 	if err != nil {
 		log.Error(err)
@@ -63,7 +63,7 @@ func Train(maxIteration, maxSetSize int) {
 		for i := 0; i < maxSetSize; i++ {
 			//s := time.Now()
 
-			learn.Learn(network, inList[i], idealList[i], 0.2)
+			learn.Learn(network, inList[i], idealList[i], speed)
 			e := learn.Evaluation(network, inList[i], idealList[i])
 			avge += e
 
