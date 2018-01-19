@@ -13,7 +13,7 @@ var (
 	mode         = flag.String("mode", "train", "working mode train or test")
 	maxIteration = flag.Int("i", 1000, "max iteration")
 	maxSetSize   = flag.Int("s", 1000, "max set size")
-	debug        = flag.Bool("debug", true, "debug mode")
+	debug        = flag.Bool("debug", false, "debug mode")
 	network      = flag.String("network", "data/network.json", "saved neural network")
 )
 
