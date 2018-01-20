@@ -1,3 +1,4 @@
 ann-mnist
 network.json
 data/network*
+*.png
